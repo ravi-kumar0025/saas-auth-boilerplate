@@ -20,25 +20,20 @@ export default function WelcomePage() {
     const { data, isPending } = useSession();
 
     useEffect(() => {
-        if (!isPending && data) {
-            router.push("/welcome");
+        if (!isPending && !data) {
+            router.push("/");
         }
     }, [isPending, data, router]);
+
+    if (isPending) {
+        return <div>Loading...</div>;
+    }
 
     const handleLogout = async () => {
         await signOut();
         router.push("/");
     };
 
-    useEffect(() => {
-        if (!isPending && !data) {
-            router.push("/");
-        }
-    }, [data, isPending, router]);
-
-    if (isPending) {
-        return <div>Loading...</div>;
-    }
 
     const user = data?.user;
 

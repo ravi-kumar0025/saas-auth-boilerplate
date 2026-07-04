@@ -13,7 +13,7 @@ export default function LoginForm({ className, ...props }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
-    const { data, isPending } = useSession();
+    const { data:session, isPending } = useSession();
 
     const handleGoogleAuth = async () => {
         await signIn.social({
@@ -37,10 +37,14 @@ export default function LoginForm({ className, ...props }) {
     };
 
     useEffect(() => {
-        if (!isPending && data) {
+        if (session) {
             router.push("/welcome");
         }
-    }, [isPending, data, router]);
+    }, [session, router]);
+
+    if (isPending) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div
