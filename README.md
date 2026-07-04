@@ -1,36 +1,266 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js SaaS Starter
+
+A modern SaaS starter template built with Next.js, Better Auth, MongoDB Atlas, Google OAuth, and Razorpay. It provides a complete foundation for authentication, user management, and subscription-based payments.
+
+---
+
+## Features
+
+- Email & Password Authentication
+- Google OAuth Login
+- Session Management
+- Protected Routes
+- MongoDB Atlas Integration
+- Razorpay Payment Gateway Integration
+- Subscription Management
+- Premium Plan Upgrade Flow
+- Responsive UI
+- Toast Notifications
+- Modern App Router Architecture
+
+---
+
+## Tech Stack
+
+- Next.js
+- React
+- JavaScript
+- Tailwind CSS
+- Better Auth
+- MongoDB Atlas
+- Google OAuth
+- Razorpay
+- Sonner
+- Vercel
+
+---
+
+## Project Structure
+
+```bash
+.
+├── app
+│   ├── api
+│   │   ├── auth
+│   │   │   └── [...all]
+│   │   │       └── route.js
+│   │   │
+│   │   └── orders
+│   │       ├── create-order
+│   │       │   └── route.js
+│   │       └── verify-order
+│   │           └── route.js
+│   │
+│   ├── payments
+│   │   └── page.jsx
+│   │
+│   ├── welcome
+│   │   └── page.jsx
+│   │
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.js
+│   └── page.js
+│
+├── components
+│   ├── ui
+│   └── login-form.jsx
+│
+├── hooks
+│
+├── lib
+│   ├── auth-client.js
+│   ├── auth.js
+│   ├── db.js
+│   ├── razorpay.js
+│   └── utils.js
+│
+├── public
+│
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Clone the Repository
+
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file in the root directory.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+# MongoDB
+DATABASE_URL=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Better Auth
+BETTER_AUTH_URL=http://localhost:3000
 
-## Deploy on Vercel
+# Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Razorpay
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Public Razorpay Key
+NEXT_PUBLIC_RAZORPAY_KEY_ID=
+```
+
+---
+
+## Authentication
+
+This project uses Better Auth for:
+
+- User Registration
+- User Login
+- Google OAuth Authentication
+- Session Management
+- User Logout
+
+Authentication state is available throughout the application using:
+
+```js
+useSession()
+```
+
+Server-side session validation is performed using:
+
+```js
+auth.api.getSession()
+```
+
+---
+
+## Payments
+
+Razorpay is used for handling premium subscriptions.
+
+### Payment Flow
+
+```text
+User clicks Upgrade
+        ↓
+Create Razorpay Order
+        ↓
+Open Razorpay Checkout
+        ↓
+Payment Success
+        ↓
+Verify Signature
+        ↓
+Activate Subscription
+        ↓
+Store Subscription in MongoDB
+```
+
+---
+
+## Database
+
+MongoDB Atlas is used as the primary database.
+
+### Better Auth Collections
+
+Managed automatically:
+
+- user
+- session
+- account
+- verification
+
+### Subscription Collection
+
+Stores subscription information for premium users.
+
+---
+
+## Scripts
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Start production server:
+
+```bash
+npm start
+```
+
+Run linting:
+
+```bash
+npm run lint
+```
+
+---
+
+## Deployment
+
+The project can be deployed on:
+
+- Vercel
+- Netlify
+- AWS
+- DigitalOcean
+
+Make sure all environment variables are configured before deployment.
+
+---
+
+## Future Improvements
+
+- Subscription Renewal
+- Razorpay Webhooks
+- Email Verification
+- Password Reset
+- Admin Dashboard
+- Payment History
+- Invoice Generation
+- User Analytics
+- Team Accounts
+
+---
+
+
+## Author
+
+Built with Next.js, Better Auth, MongoDB Atlas, and Razorpay.
